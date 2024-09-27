@@ -22,7 +22,6 @@ if system == "Linux":
         display_message("Vous êtes root.", Fore.GREEN)
     else:
         display_message("Vous n'êtes pas root.", Fore.RED)
-        raise RuntimeError("Docker is not installed.")
 
     # Détection de la famille Linux (Debian/RedHat)
     with open("/etc/os-release", "r") as f:
@@ -42,7 +41,7 @@ elif system == "Windows":
 
 else:
     display_message("Système d'exploitation non supporté.", Fore.RED)
-    raise RuntimeError("Docker is not installed.")
+    exit()
 
 # 2. Docker est-il installé ?
 def is_docker_installed():
@@ -75,7 +74,7 @@ else:
             display_message("Docker installé avec succès via winget.", Fore.GREEN)
         except subprocess.CalledProcessError:
             display_message("Échec de l'installation de Docker via winget.", Fore.RED)
-            raise RuntimeError("Docker is not installed.")
+            exit()
 
 # 3. Le service Docker est-il actif ?
 def is_docker_active():
