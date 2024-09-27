@@ -1,0 +1,5 @@
+platform
+subprocess
+os
+time
+colorama==0.4.6
