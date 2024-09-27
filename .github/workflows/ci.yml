@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Vérifier le code
+        uses: actions/checkout@v2
+
+      - name: Installer Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'  # Spécifiez la version de Python que vous utilisez
+
+      - name: Créer un environnement virtuel
+        run: |
+          python -m venv venv
+          source venv/bin/activate
+
+      - name: Installer les dépendances
+        run: |
+          source venv/bin/activate
+          python -m pip install --upgrade pip
+          pip install colorama pytest
+
+      - name: Exécuter les tests
+        run: |
+          source venv/bin/activate
+          pytest test_conteneurcreator.py  # Changez ce nom en fonction de votre fichier de tests
